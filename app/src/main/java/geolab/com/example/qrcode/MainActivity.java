@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initUI();
+        System.out.println("----");
     }
     private void initUI() {
         imageView = findViewById(R.id.qr_code_image_id);
