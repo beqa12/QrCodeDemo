@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initUI();
         System.out.println("----");
+        System.out.println("beqa");
     }
     private void initUI() {
         imageView = findViewById(R.id.qr_code_image_id);
