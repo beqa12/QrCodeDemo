@@ -6,61 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-   <ImageView
-       android:id="@+id/qr_code_image_id"
-       app:layout_constraintTop_toTopOf="parent"
-       android:layout_width="match_parent"
-       android:layout_height="0dp"
-       app:layout_constraintDimensionRatio="H, 16:9"
-
-       />
+    <ImageView
+        android:id="@+id/qr_code_image_id"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="H, 16:9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/user_name_id"
-        app:layout_constraintTop_toBottomOf="@+id/qr_code_image_id"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qr_code_image_id"
         android:layout_marginTop="20dp"
-        android:hint="name"
+        android:hint="user name"
         android:inputType="text"
         android:imeOptions="actionDone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/user_mobile_number_id"
-        app:layout_constraintTop_toBottomOf="@+id/user_name_id"
+        android:id="@+id/user_number_id"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/user_name_id"
+        android:hint="mobile number"
         android:inputType="number"
         android:imeOptions="actionDone"
-        android:hint="user number"
-        />
-    <Button
-        android:id="@+id/generate_btn_id"
-        app:layout_constraintTop_toBottomOf="@+id/user_mobile_number_id"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="#fff"
-        android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"
-        android:text="generate"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/start_camera_id"
+        android:id="@+id/generate_btn_id"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_number_id"
+        android:layout_marginTop="20dp"
+        android:background="#fff"
+        android:text="genarate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/start_camera_id"
         android:text="start camera"
-        android:layout_marginBottom="20dp"
         android:background="#fff"
         android:textColor="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/generate_btn_id"
+        android:layout_marginTop="100dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

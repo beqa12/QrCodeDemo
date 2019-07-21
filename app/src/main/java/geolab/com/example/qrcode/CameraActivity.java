@@ -1,82 +1,57 @@
 package geolab.com.example.qrcode;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.graphics.Camera;
 import android.os.Bundle;
 import android.view.SurfaceView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
+import androidmads.library.qrgenearator.QRGContents;
 import github.nisrulz.qreader.QRDataListener;
 import github.nisrulz.qreader.QREader;
 
 public class CameraActivity extends AppCompatActivity {
     private SurfaceView cameraView;
-    private TextView readTxtView;
     private QREader qrEader;
-    private TextView noPermissionTxtView;
-    private int cameraPermissionRequestCode = 100;
+    private TextView codeReadTxtView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera);
-
+        setContentView(R.layout.activity_camera2);
         cameraView = findViewById(R.id.camera_view_id);
-        readTxtView = findViewById(R.id.text_field_id);
-        noPermissionTxtView = findViewById(R.id.no_permission_txt_view_id);
-
-
+        codeReadTxtView = findViewById(R.id.text_id);
         qrEader = new QREader.Builder(this, cameraView, new QRDataListener() {
             @Override
             public void onDetected(String data) {
-                readTxtView.post(new Runnable() {
+                codeReadTxtView.post(new Runnable() {
                     @Override
                     public void run() {
-                        readTxtView.setText(data + "\n");
+                        codeReadTxtView.setText(data);
+                        codeReadTxtView.setOnClickListener(v->{
+                            startActivity(new Intent(CameraActivity.this, ScannerActivity.class));
+                        });
+
                     }
                 });
             }
         }).facing(QREader.BACK_CAM)
-                .enableAutofocus(true)
                 .height(cameraView.getHeight())
                 .width(cameraView.getWidth())
                 .build();
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
-        if (hasCameraPermission()) {
-            qrEader.initAndStart(cameraView);
-        } else {
-            requestPermission();
-        }
-    }
-
-    private boolean hasCameraPermission() {
-        int res = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-        return res == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private void requestPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, cameraPermissionRequestCode);
+        qrEader.initAndStart(cameraView);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == cameraPermissionRequestCode) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                qrEader.initAndStart(cameraView);
-            }
-        } else {
-            Toast.makeText(this, "permission is switched off", Toast.LENGTH_SHORT).show();
-        }
+    protected void onStop() {
+        super.onStop();
+        qrEader.stop();
     }
 }
