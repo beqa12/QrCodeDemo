@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initUI();
         System.out.println("----");
-        System.out.println("beqa");
+        System.out.println("code");
     }
     private void initUI() {
         imageView = findViewById(R.id.qr_code_image_id);
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             String name = userName.getText().toString();
             String number = userMobileNumber.getText().toString();
             Bundle bundle = new Bundle();
-            bundle.putString("number", "599114713");
+            bundle.putString("number", "54843");
             genarateQrCode(name, bundle);
         });
         cameraBtn.setOnClickListener(v->{
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             Bitmap bitmap = encoder.encodeAsBitmap();
             imageView.setImageBitmap(bitmap);
             File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-            File pathFile = new File(file, "beqa");
+            File pathFile = new File(file, "qrCodeImage");
             FileOutputStream fo = null;
             try {
                 fo = new FileOutputStream(pathFile);
